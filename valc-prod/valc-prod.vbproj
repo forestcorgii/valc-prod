@@ -11,9 +11,10 @@
     <AssemblyName>valc-prod</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,7 +32,7 @@
     <DefineDebug>false</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>D:\4 - Bins\valc\valc-prod\</OutputPath>
     <DocumentationFile>valc-prod.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
@@ -48,12 +49,6 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="confsaver-xml">
-      <HintPath>D:\4 - Bins\confsaver-xml\confsaver-xml.dll</HintPath>
-    </Reference>
-    <Reference Include="sean">
-      <HintPath>D:\4 - Bins\sean\sean.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -79,19 +74,13 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmMain.Designer.vb">
       <DependentUpon>frmMain.vb</DependentUpon>
     </Compile>
     <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="General.vb" />
     <Compile Include="mdlClass.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -109,6 +98,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Settings.vb" />
     <Compile Include="sfrmHolder.Designer.vb">
       <DependentUpon>sfrmHolder.vb</DependentUpon>
     </Compile>
@@ -133,6 +123,19 @@
     <Compile Include="sfrmSettings.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sfrmSkipReason.Designer.vb">
+      <DependentUpon>sfrmSkipReason.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sfrmSkipReason.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sfrmUpdateBOL.Designer.vb">
+      <DependentUpon>sfrmUpdateBOL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sfrmUpdateBOL.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="XmlSerialization.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmMain.resx">
@@ -156,6 +159,12 @@
     <EmbeddedResource Include="sfrmSettings.resx">
       <DependentUpon>sfrmSettings.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sfrmSkipReason.resx">
+      <DependentUpon>sfrmSkipReason.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sfrmUpdateBOL.resx">
+      <DependentUpon>sfrmUpdateBOL.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="My Project\Application.myapp">
@@ -169,5 +178,6 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

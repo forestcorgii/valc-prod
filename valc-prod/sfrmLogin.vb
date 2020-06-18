@@ -4,12 +4,17 @@
         InitializeComponent()
 
         User = New clsUserInfo
-        tbFullname.Text = _user.Fullname
-        tbUsername.Text = _user.Username
+        If _user IsNot Nothing Then
+            tbFullname.Text = _user.Fullname
+            tbUsername.Text = _user.Username
+            chbRater.Checked = _user.Rater
+        End If
     End Sub
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         User.Fullname = tbFullname.Text
         User.Username = tbUsername.Text
+        User.Rater = chbRater.Checked
+
         DialogResult = DialogResult.OK
         Close()
     End Sub
@@ -23,5 +28,9 @@
         If e.KeyCode = Keys.Enter Then
             btnLogin.PerformClick()
         End If
+    End Sub
+
+    Private Sub sfrmLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class

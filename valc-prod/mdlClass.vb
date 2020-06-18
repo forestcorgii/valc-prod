@@ -1,5 +1,4 @@
 ﻿Imports System.IO
-Imports confsaver_xml
 'Public Batch As New BatchInfo
 Public Class BatchInfos
     Inherits List(Of BatchInfo)
@@ -7,6 +6,7 @@ Public Class BatchInfos
     Public Overloads Function Find(tripNumber As String) As BatchInfo
         Return (From res In Me Where res.TripNo = tripNumber Select res).FirstOrDefault
     End Function
+
 End Class
 Public Class BatchInfo
     Implements ICloneable
@@ -19,9 +19,25 @@ Public Class BatchInfo
     Public Folder As String = ""
     Public Synergized As String = ""
     Public Remarks As String = ""
+    Public Type As String = ""
 
     <Xml.Serialization.XmlIgnore> Public BatchRow As DataGridViewRow
-    <Xml.Serialization.XmlIgnore> Public Filename As String
+    <Xml.Serialization.XmlIgnore> Public ReadOnly Property Filename As String
+        Get
+            Dim f As String = Directory.GetFiles(DateFolder & "\BATCH\", "*" & TripNo & ".XML").FirstOrDefault
+            If f Is Nothing Then f = Directory.GetFiles(DateFolder & "\BATCH\", "*" & TripNo & "_*.xml").FirstOrDefault
+
+            If f IsNot Nothing Then
+                Return Path.GetFileNameWithoutExtension(f)
+            End If
+            Return ""
+        End Get
+    End Property
+    <Xml.Serialization.XmlIgnore> Public ReadOnly Property BatchFileInfo As FileInfo
+        Get
+            Return New FileInfo(DateFolder & "\BATCH\" & Filename & ".XML")
+        End Get
+    End Property
     <Xml.Serialization.XmlIgnore> Public DateFolder As String
     <Xml.Serialization.XmlIgnore> Public ReadOnly Property ForEntry As Integer
         Get
@@ -32,6 +48,7 @@ Public Class BatchInfo
                     filecount = BillCount - (Query.Count + Billed.Count + Reject.Count + Ongoing.Count)
                 End If
             End If
+            If filecount < 0 Then Return 0
             Return filecount
         End Get
     End Property
@@ -91,7 +108,10 @@ Public Class BatchInfo
     <Xml.Serialization.XmlIgnore> Public ReadOnly Property TA As String
         Get
             Dim tm As TimeSpan = (Time - Date.Parse(ClientEmailDateTime))
-            Return String.Format("{0:00}:{1:00}", tm.Minutes, tm.Seconds)
+            If tm.Minutes > 0 Then
+                Return String.Format("{0:00}:{1:00}", tm.Minutes, tm.Seconds)
+            End If
+            Return "###"
         End Get
     End Property
 
@@ -108,6 +128,18 @@ Public Class BatchInfo
             Return Nothing
         End Get
     End Property
+
+    <Xml.Serialization.XmlIgnore> Private _modifiedDate As Date
+    Public Function Modified() As Boolean
+        'Dim BatchFileInfo As New FileInfo(DateFolder & "\BATCH\" & Filename & ".XML")
+        If BatchFileInfo.Exists Then
+            If Not BatchFileInfo.LastWriteTime = _modifiedDate Then
+                _modifiedDate = BatchFileInfo.LastWriteTime
+                Return True
+            End If
+        End If
+        Return False
+    End Function
 
     Private savedDate_timefile As Date
     Private savedDate_system As Date
@@ -137,6 +169,7 @@ Public Class BatchInfo
     End Sub
 
     Public Sub RefreshRow()
+        If TA = "###" Then Exit Sub
         If CInt(TA.Substring(0, 2)) >= 30 Then
             changeRowColor(Color.Maroon, Color.White)
         ElseIf CInt(TA.Substring(0, 2)) >= 25 Then
@@ -176,11 +209,12 @@ Public Class BOLInfos
             Case BOLInfo.BOLStatus.FINISH
                 fld = "\PROCESSED\FINISH"
         End Select
+
         Try
             Dim pros As String() = Directory.GetFiles(dateFolder & fld, "*" & username & ".XML")
             Return (From res In pros Select DirectCast(XmlSerialization.ReadFromFile(res, New BOLInfo), BOLInfo)).ToArray
         Catch ex As Exception
-            MsgBox(ex.ToString)
+            'MsgBox(ex.ToString)
         End Try
         Return Nothing
     End Function
@@ -196,6 +230,20 @@ Public Class BOLInfos
         Return Me.MemberwiseClone
     End Function
 End Class
+
+'Public Class BOLInfo
+'    Public Batch As New BatchInfo
+'    Public Entry As New List(Of TimeInfo)
+'    Public Query As New List(Of QueryInfo)
+'    Public ProNo As String = ""
+'    Public FBNo As String = ""
+'    Public QueryToVALC As New List(Of QueryInfo)
+'    Public Username As String = ""
+'    Public Fullname As String = ""
+'    Public Status As String = "" 'Billed,Reject,Query,Answered,Query_Billed
+'    Public SkippedReason As String = ""
+'    Public Remarks As String = ""
+'End Class
 Public Class BOLInfo
     Implements ICloneable
 
@@ -208,38 +256,49 @@ Public Class BOLInfo
     Public Username As String = ""
     Public Fullname As String = ""
     Public Status As String = "" 'Billed,Reject,Query,Answered,Query_Billed
+    Public SkippedReason As String = ""
     Public Remarks As String = ""
 
+    <Xml.Serialization.XmlIgnore> Public ReadOnly Property Filename As String
+        Get
+            Return String.Format("{0}_{1}_{2}_{3}", Batch.Filename, ProNo, FBNo, Username)
+        End Get
+    End Property
 
-
-    Public Sub Write(status As BOLStatus)
+    Public Sub Write(status As String)
         Dim fld As String = ""
         Select Case status
-            Case BOLStatus.ONGOING
+            Case "ONGOING" 'BOLStatus.ONGOING
                 fld = "\ONGOING"
-            Case BOLStatus.QUERY
+            Case "QUERY" 'BOLStatus.QUERY
                 fld = "\PROCESSED\QUERY"
-            Case BOLStatus.FINISH
+            Case "SKIPPED" 'BOLStatus.SKIPPED
+                fld = "\PROCESSED\Skipped"
+            Case "BILLED", "BILLED QUERY" 'BOLStatus.FINISH
                 fld = "\PROCESSED\FINISH"
         End Select
 
-        XmlSerialization.WriteToFile(String.Format("{0}\{1}\{2}_{3}_{4}_{5}.XML", Batch.DateFolder, fld, Batch.Filename, ProNo, FBNo, Username), Me)
+        'XmlSerialization.WriteToFile(String.Format("{0}\{1}\{2}_{3}_{4}_{5}.XML", Batch.DateFolder, fld, Batch.Filename, ProNo, FBNo, Username), Me)
+        XmlSerialization.WriteToFile(String.Format("{0}\{1}\{2}.XML", Batch.DateFolder, fld, Filename), Me)
     End Sub
 
-    Public Sub Delete(status As BOLStatus)
+    Public Sub Delete(status As String)
         Dim fld As String = ""
         Select Case status
-            Case BOLStatus.ONGOING
+            Case "ONGOING" 'BOLStatus.ONGOING
                 fld = "\ONGOING"
-            Case BOLStatus.QUERY
+            Case "QUERY" 'BOLStatus.QUERY
                 fld = "\PROCESSED\QUERY"
-            Case BOLStatus.FINISH
+            Case "SKIPPED" 'BOLStatus.SKIPPED
+                fld = "\PROCESSED\Skipped"
+            Case "BILLED", "BILLED QUERY" 'BOLStatus.FINISH
                 fld = "\PROCESSED\FINISH"
-            Case BOLStatus.ANSWERED
+            Case "ANSWERED" 'BOLStatus.ANSWERED
                 fld = "\PROCESSED\QUERY\ANSWERED"
         End Select
 
-        File.Delete(String.Format("{0}\{1}\{2}_{3}_{4}_{5}.XML", Batch.DateFolder, fld, Batch.Filename, ProNo, FBNo, Username))
+        'File.Delete(String.Format("{0}\{1}\{2}.XML", Batch.DateFolder, fld, Batch.Filename, ProNo, FBNo, Username))
+        File.Delete(String.Format("{0}\{1}\{2}.XML", Batch.DateFolder, fld, Filename))
     End Sub
 
     Public Enum BOLStatus
@@ -247,7 +306,8 @@ Public Class BOLInfo
         QUERY = 1
         FINISH = 2
         ANSWERED = 3
-        REJECT = 4
+        SKIPPED = 4
+
     End Enum
 
     <Xml.Serialization.XmlIgnore> Public ProductionRow As DataGridViewRow
@@ -274,7 +334,7 @@ End Class
 Public Class TimeInfo
     Public Start As String = ""
     Public Endd As String = ""
-
+    Public Status As String = ""
     Public ReadOnly Property TimeElapsed As String
         Get
             Dim tm As TimeSpan = (Date.Parse(Endd) - Date.Parse(Start))
@@ -282,16 +342,33 @@ Public Class TimeInfo
         End Get
     End Property
 End Class
+
 Public Class QueryInfo
     Public Start As String = ""
     Public Endd As String = ""
+    Public QuerySentToClient As String = ""
+    Public AnswerReceivedFromClient As String = ""
     Public BillerQuery As String = ""
     Public QueryAnswer As String = ""
     Public ShipperName As String = ""
     Public ConsigneeName As String = ""
 End Class
+'Public Class QueryInfo
+'    Public Start As String = ""
+'    Public Endd As String = ""
+'    Public BillerQuery As String = ""
+'    Public QueryAnswer As String = ""
+'    Public ShipperName As String = ""
+'    Public ConsigneeName As String = ""
+'End Class
 Public Class clsUserInfo
     Public Fullname As String
     Public Username As String
+    Public Rater As Boolean
 End Class
 
+Public Class clsConf
+    Public ProductionPath As String = ""
+    Public BackupPath As String = ""
+    Public SwitchWindow As Boolean = False
+End Class

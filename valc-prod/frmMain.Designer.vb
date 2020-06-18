@@ -51,6 +51,18 @@ Partial Class frmMain
         Me.clQueryContent = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.clQueryAnswer = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvBatches = New System.Windows.Forms.DataGridView()
+        Me.clFilename = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clsTripNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clTA = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clsBillCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clsForEntry = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clQuery = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clsBilled = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clReject = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clsOngoing = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clsDatetime = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clSender = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clBatchRemarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tm = New System.Windows.Forms.Timer(Me.components)
         Me.bgRefresher = New System.ComponentModel.BackgroundWorker()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
@@ -68,18 +80,7 @@ Partial Class frmMain
         Me.clEndtime = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tbTripNumber = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.clFilename = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clsTripNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clTA = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clsBillCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clsForEntry = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clQuery = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clsBilled = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clReject = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clsOngoing = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clsDatetime = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clSender = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clBatchRemarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.dgvQueryAnswer, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -96,7 +97,7 @@ Partial Class frmMain
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(7, 2, 0, 2)
-        Me.MenuStrip1.Size = New System.Drawing.Size(982, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1035, 24)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -111,13 +112,13 @@ Partial Class frmMain
         '
         Me.mnAddBill.Name = "mnAddBill"
         Me.mnAddBill.ShortcutKeys = System.Windows.Forms.Keys.F1
-        Me.mnAddBill.Size = New System.Drawing.Size(152, 22)
+        Me.mnAddBill.Size = New System.Drawing.Size(134, 22)
         Me.mnAddBill.Text = "Add Bill"
         '
         'mnRelogin
         '
         Me.mnRelogin.Name = "mnRelogin"
-        Me.mnRelogin.Size = New System.Drawing.Size(152, 22)
+        Me.mnRelogin.Size = New System.Drawing.Size(134, 22)
         Me.mnRelogin.Text = "Re-Login"
         '
         'mnSettings
@@ -130,10 +131,10 @@ Partial Class frmMain
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lbFullname, Me.lbUsername})
         Me.StatusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 399)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 396)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 16, 0)
-        Me.StatusStrip1.Size = New System.Drawing.Size(982, 20)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1035, 20)
         Me.StatusStrip1.SizingGrip = False
         Me.StatusStrip1.TabIndex = 1
         Me.StatusStrip1.Text = "StatusStrip1"
@@ -141,7 +142,7 @@ Partial Class frmMain
         'lbFullname
         '
         Me.lbFullname.Name = "lbFullname"
-        Me.lbFullname.Size = New System.Drawing.Size(71, 17)
+        Me.lbFullname.Size = New System.Drawing.Size(71, 15)
         Me.lbFullname.Text = "USERNAME:"
         '
         'lbUsername
@@ -154,8 +155,6 @@ Partial Class frmMain
         '
         'cbRemark
         '
-        Me.cbRemark.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbRemark.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbRemark.FormattingEnabled = True
         Me.cbRemark.Items.AddRange(New Object() {"Full Audit", "QAFA", "Processed in Synergize", "Skipped Bills"})
@@ -166,19 +165,16 @@ Partial Class frmMain
         '
         'tbEndtime
         '
-        Me.tbEndtime.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tbEndtime.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbEndtime.Location = New System.Drawing.Point(67, 197)
         Me.tbEndtime.Name = "tbEndtime"
         Me.tbEndtime.ReadOnly = True
         Me.tbEndtime.Size = New System.Drawing.Size(116, 22)
         Me.tbEndtime.TabIndex = 13
+        Me.tbEndtime.Visible = False
         '
         'tbStarttime
         '
-        Me.tbStarttime.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tbStarttime.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbStarttime.Location = New System.Drawing.Point(67, 171)
         Me.tbStarttime.Name = "tbStarttime"
@@ -188,8 +184,6 @@ Partial Class frmMain
         '
         'tbFolder
         '
-        Me.tbFolder.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tbFolder.Enabled = False
         Me.tbFolder.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbFolder.Location = New System.Drawing.Point(67, 77)
@@ -200,22 +194,18 @@ Partial Class frmMain
         '
         'tbProNumber
         '
-        Me.tbProNumber.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tbProNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbProNumber.Location = New System.Drawing.Point(67, 103)
-        Me.tbProNumber.MaxLength = 8
+        Me.tbProNumber.MaxLength = 20
         Me.tbProNumber.Name = "tbProNumber"
         Me.tbProNumber.Size = New System.Drawing.Size(116, 22)
         Me.tbProNumber.TabIndex = 1
         '
         'tbFBNumber
         '
-        Me.tbFBNumber.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tbFBNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbFBNumber.Location = New System.Drawing.Point(67, 128)
-        Me.tbFBNumber.MaxLength = 5
+        Me.tbFBNumber.MaxLength = 20
         Me.tbFBNumber.Name = "tbFBNumber"
         Me.tbFBNumber.Size = New System.Drawing.Size(116, 22)
         Me.tbFBNumber.TabIndex = 2
@@ -229,6 +219,7 @@ Partial Class frmMain
         Me.Label7.Size = New System.Drawing.Size(52, 13)
         Me.Label7.TabIndex = 6
         Me.Label7.Text = "End Time"
+        Me.Label7.Visible = False
         '
         'Label5
         '
@@ -288,12 +279,12 @@ Partial Class frmMain
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvQueryAnswer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvQueryAnswer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clSendTime, Me.clTrip, Me.clProNumber, Me.clFBNumber, Me.clQueryContent, Me.clQueryAnswer})
-        Me.dgvQueryAnswer.Location = New System.Drawing.Point(12, 301)
+        Me.dgvQueryAnswer.Location = New System.Drawing.Point(12, 298)
         Me.dgvQueryAnswer.MultiSelect = False
         Me.dgvQueryAnswer.Name = "dgvQueryAnswer"
         Me.dgvQueryAnswer.RowHeadersVisible = False
         Me.dgvQueryAnswer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvQueryAnswer.Size = New System.Drawing.Size(963, 93)
+        Me.dgvQueryAnswer.Size = New System.Drawing.Size(1016, 93)
         Me.dgvQueryAnswer.TabIndex = 14
         '
         'clSendTime
@@ -351,151 +342,8 @@ Partial Class frmMain
         Me.dgvBatches.Name = "dgvBatches"
         Me.dgvBatches.RowHeadersVisible = False
         Me.dgvBatches.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvBatches.Size = New System.Drawing.Size(777, 238)
+        Me.dgvBatches.Size = New System.Drawing.Size(830, 235)
         Me.dgvBatches.TabIndex = 0
-        '
-        'tm
-        '
-        '
-        'bgRefresher
-        '
-        '
-        'TabControl1
-        '
-        Me.TabControl1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Location = New System.Drawing.Point(191, 27)
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(791, 272)
-        Me.TabControl1.TabIndex = 10
-        '
-        'TabPage1
-        '
-        Me.TabPage1.Controls.Add(Me.dgvBatches)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 24)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(783, 244)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Batches"
-        Me.TabPage1.UseVisualStyleBackColor = True
-        '
-        'TabPage2
-        '
-        Me.TabPage2.Controls.Add(Me.dgvProduction)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 24)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(783, 244)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Production"
-        Me.TabPage2.UseVisualStyleBackColor = True
-        '
-        'dgvProduction
-        '
-        Me.dgvProduction.AllowUserToAddRows = False
-        Me.dgvProduction.AllowUserToDeleteRows = False
-        Me.dgvProduction.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvProduction.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clDatetime, Me.clFolder, Me.clProdTripNumber, Me.clProdProNumber, Me.clProdFBNumber, Me.clProdRemark, Me.clStatus, Me.clStarttime, Me.clEndtime})
-        Me.dgvProduction.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dgvProduction.Location = New System.Drawing.Point(3, 3)
-        Me.dgvProduction.Name = "dgvProduction"
-        Me.dgvProduction.RowHeadersVisible = False
-        Me.dgvProduction.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvProduction.Size = New System.Drawing.Size(777, 238)
-        Me.dgvProduction.TabIndex = 0
-        '
-        'clDatetime
-        '
-        Me.clDatetime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.clDatetime.HeaderText = "Datetime"
-        Me.clDatetime.Name = "clDatetime"
-        Me.clDatetime.ReadOnly = True
-        Me.clDatetime.Width = 82
-        '
-        'clFolder
-        '
-        Me.clFolder.HeaderText = "Folder"
-        Me.clFolder.Name = "clFolder"
-        Me.clFolder.ReadOnly = True
-        '
-        'clProdTripNumber
-        '
-        Me.clProdTripNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.clProdTripNumber.HeaderText = "Trip #"
-        Me.clProdTripNumber.Name = "clProdTripNumber"
-        Me.clProdTripNumber.ReadOnly = True
-        Me.clProdTripNumber.Width = 63
-        '
-        'clProdProNumber
-        '
-        Me.clProdProNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.clProdProNumber.HeaderText = "Pro #"
-        Me.clProdProNumber.Name = "clProdProNumber"
-        Me.clProdProNumber.ReadOnly = True
-        Me.clProdProNumber.Width = 61
-        '
-        'clProdFBNumber
-        '
-        Me.clProdFBNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.clProdFBNumber.HeaderText = "FB #"
-        Me.clProdFBNumber.Name = "clProdFBNumber"
-        Me.clProdFBNumber.ReadOnly = True
-        Me.clProdFBNumber.Width = 57
-        '
-        'clProdRemark
-        '
-        Me.clProdRemark.HeaderText = "Remark"
-        Me.clProdRemark.Name = "clProdRemark"
-        Me.clProdRemark.ReadOnly = True
-        '
-        'clStatus
-        '
-        Me.clStatus.HeaderText = "Status"
-        Me.clStatus.Name = "clStatus"
-        Me.clStatus.ReadOnly = True
-        '
-        'clStarttime
-        '
-        Me.clStarttime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.clStarttime.HeaderText = "Start Time"
-        Me.clStarttime.Name = "clStarttime"
-        Me.clStarttime.ReadOnly = True
-        Me.clStarttime.Width = 88
-        '
-        'clEndtime
-        '
-        Me.clEndtime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.clEndtime.HeaderText = "End Time"
-        Me.clEndtime.Name = "clEndtime"
-        Me.clEndtime.ReadOnly = True
-        Me.clEndtime.Width = 85
-        '
-        'tbTripNumber
-        '
-        Me.tbTripNumber.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbTripNumber.Enabled = False
-        Me.tbTripNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbTripNumber.Location = New System.Drawing.Point(67, 37)
-        Me.tbTripNumber.Name = "tbTripNumber"
-        Me.tbTripNumber.ReadOnly = True
-        Me.tbTripNumber.Size = New System.Drawing.Size(116, 22)
-        Me.tbTripNumber.TabIndex = 15
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(33, 43)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(35, 13)
-        Me.Label8.TabIndex = 16
-        Me.Label8.Text = "Trip #"
         '
         'clFilename
         '
@@ -586,12 +434,153 @@ Partial Class frmMain
         Me.clBatchRemarks.Name = "clBatchRemarks"
         Me.clBatchRemarks.ReadOnly = True
         '
+        'tm
+        '
+        '
+        'bgRefresher
+        '
+        '
+        'TabControl1
+        '
+        Me.TabControl1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Location = New System.Drawing.Point(191, 27)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(844, 269)
+        Me.TabControl1.TabIndex = 10
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.dgvBatches)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 24)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(836, 241)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "Batches"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.dgvProduction)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 24)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(836, 241)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Production"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'dgvProduction
+        '
+        Me.dgvProduction.AllowUserToAddRows = False
+        Me.dgvProduction.AllowUserToDeleteRows = False
+        Me.dgvProduction.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvProduction.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clDatetime, Me.clFolder, Me.clProdTripNumber, Me.clProdProNumber, Me.clProdFBNumber, Me.clProdRemark, Me.clStatus, Me.clStarttime, Me.clEndtime})
+        Me.dgvProduction.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvProduction.Location = New System.Drawing.Point(3, 3)
+        Me.dgvProduction.Name = "dgvProduction"
+        Me.dgvProduction.RowHeadersVisible = False
+        Me.dgvProduction.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvProduction.Size = New System.Drawing.Size(830, 235)
+        Me.dgvProduction.TabIndex = 0
+        '
+        'clDatetime
+        '
+        Me.clDatetime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.clDatetime.HeaderText = "Datetime"
+        Me.clDatetime.Name = "clDatetime"
+        Me.clDatetime.ReadOnly = True
+        Me.clDatetime.Width = 82
+        '
+        'clFolder
+        '
+        Me.clFolder.HeaderText = "Folder"
+        Me.clFolder.Name = "clFolder"
+        Me.clFolder.ReadOnly = True
+        '
+        'clProdTripNumber
+        '
+        Me.clProdTripNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.clProdTripNumber.HeaderText = "Trip #"
+        Me.clProdTripNumber.Name = "clProdTripNumber"
+        Me.clProdTripNumber.ReadOnly = True
+        Me.clProdTripNumber.Width = 63
+        '
+        'clProdProNumber
+        '
+        Me.clProdProNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.clProdProNumber.HeaderText = "Pro #"
+        Me.clProdProNumber.Name = "clProdProNumber"
+        Me.clProdProNumber.ReadOnly = True
+        Me.clProdProNumber.Width = 61
+        '
+        'clProdFBNumber
+        '
+        Me.clProdFBNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.clProdFBNumber.HeaderText = "FB #"
+        Me.clProdFBNumber.Name = "clProdFBNumber"
+        Me.clProdFBNumber.ReadOnly = True
+        Me.clProdFBNumber.Width = 57
+        '
+        'clProdRemark
+        '
+        Me.clProdRemark.HeaderText = "Remark"
+        Me.clProdRemark.Name = "clProdRemark"
+        Me.clProdRemark.ReadOnly = True
+        '
+        'clStatus
+        '
+        Me.clStatus.HeaderText = "Status"
+        Me.clStatus.Name = "clStatus"
+        Me.clStatus.ReadOnly = True
+        '
+        'clStarttime
+        '
+        Me.clStarttime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.clStarttime.HeaderText = "Start Time"
+        Me.clStarttime.Name = "clStarttime"
+        Me.clStarttime.ReadOnly = True
+        Me.clStarttime.Width = 88
+        '
+        'clEndtime
+        '
+        Me.clEndtime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.clEndtime.HeaderText = "End Time"
+        Me.clEndtime.Name = "clEndtime"
+        Me.clEndtime.ReadOnly = True
+        Me.clEndtime.Width = 85
+        '
+        'tbTripNumber
+        '
+        Me.tbTripNumber.Enabled = False
+        Me.tbTripNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbTripNumber.Location = New System.Drawing.Point(67, 37)
+        Me.tbTripNumber.Name = "tbTripNumber"
+        Me.tbTripNumber.ReadOnly = True
+        Me.tbTripNumber.Size = New System.Drawing.Size(116, 22)
+        Me.tbTripNumber.TabIndex = 15
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(33, 43)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(35, 13)
+        Me.Label8.TabIndex = 16
+        Me.Label8.Text = "Trip #"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(982, 419)
+        Me.ClientSize = New System.Drawing.Size(1035, 416)
         Me.Controls.Add(Me.tbTripNumber)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.cbRemark)
@@ -686,4 +675,5 @@ Partial Class frmMain
     Friend WithEvents clsDatetime As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents clSender As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents clBatchRemarks As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Timer1 As Timer
 End Class

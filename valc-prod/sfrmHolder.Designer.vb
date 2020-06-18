@@ -44,6 +44,7 @@ Partial Class sfrmHolder
         Me.Label8 = New System.Windows.Forms.Label()
         Me.btnQuerytoVALC = New System.Windows.Forms.Button()
         Me.btnQuery = New System.Windows.Forms.Button()
+        Me.btnSkip = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lbFolder
@@ -51,16 +52,17 @@ Partial Class sfrmHolder
         Me.lbFolder.AutoSize = True
         Me.lbFolder.Location = New System.Drawing.Point(75, 58)
         Me.lbFolder.Name = "lbFolder"
-        Me.lbFolder.Size = New System.Drawing.Size(38, 12)
+        Me.lbFolder.Size = New System.Drawing.Size(39, 13)
         Me.lbFolder.TabIndex = 0
         Me.lbFolder.Text = "Folder:"
+        Me.lbFolder.Visible = False
         '
         'lbProNumber
         '
         Me.lbProNumber.AutoSize = True
         Me.lbProNumber.Location = New System.Drawing.Point(75, 81)
         Me.lbProNumber.Name = "lbProNumber"
-        Me.lbProNumber.Size = New System.Drawing.Size(33, 12)
+        Me.lbProNumber.Size = New System.Drawing.Size(36, 13)
         Me.lbProNumber.TabIndex = 1
         Me.lbProNumber.Text = "Pro #:"
         '
@@ -69,7 +71,7 @@ Partial Class sfrmHolder
         Me.lbFBNumber.AutoSize = True
         Me.lbFBNumber.Location = New System.Drawing.Point(75, 105)
         Me.lbFBNumber.Name = "lbFBNumber"
-        Me.lbFBNumber.Size = New System.Drawing.Size(30, 12)
+        Me.lbFBNumber.Size = New System.Drawing.Size(33, 13)
         Me.lbFBNumber.TabIndex = 2
         Me.lbFBNumber.Text = "FB #:"
         '
@@ -78,7 +80,7 @@ Partial Class sfrmHolder
         Me.lbStarttime.AutoSize = True
         Me.lbStarttime.Location = New System.Drawing.Point(75, 130)
         Me.lbStarttime.Name = "lbStarttime"
-        Me.lbStarttime.Size = New System.Drawing.Size(56, 12)
+        Me.lbStarttime.Size = New System.Drawing.Size(58, 13)
         Me.lbStarttime.TabIndex = 3
         Me.lbStarttime.Text = "Start Time:"
         '
@@ -87,7 +89,7 @@ Partial Class sfrmHolder
         Me.lbElapsetime.AutoSize = True
         Me.lbElapsetime.Location = New System.Drawing.Point(75, 153)
         Me.lbElapsetime.Name = "lbElapsetime"
-        Me.lbElapsetime.Size = New System.Drawing.Size(71, 12)
+        Me.lbElapsetime.Size = New System.Drawing.Size(74, 13)
         Me.lbElapsetime.TabIndex = 4
         Me.lbElapsetime.Text = "Elapsed Time:"
         '
@@ -96,7 +98,7 @@ Partial Class sfrmHolder
         Me.lbRemark.AutoSize = True
         Me.lbRemark.Location = New System.Drawing.Point(75, 188)
         Me.lbRemark.Name = "lbRemark"
-        Me.lbRemark.Size = New System.Drawing.Size(44, 12)
+        Me.lbRemark.Size = New System.Drawing.Size(47, 13)
         Me.lbRemark.TabIndex = 5
         Me.lbRemark.Text = "Remark:"
         '
@@ -105,7 +107,7 @@ Partial Class sfrmHolder
         Me.lbFullname.AutoSize = True
         Me.lbFullname.Location = New System.Drawing.Point(75, 12)
         Me.lbFullname.Name = "lbFullname"
-        Me.lbFullname.Size = New System.Drawing.Size(50, 12)
+        Me.lbFullname.Size = New System.Drawing.Size(52, 13)
         Me.lbFullname.TabIndex = 6
         Me.lbFullname.Text = "Fullname:"
         '
@@ -114,28 +116,28 @@ Partial Class sfrmHolder
         Me.lbUsername.AutoSize = True
         Me.lbUsername.Location = New System.Drawing.Point(75, 33)
         Me.lbUsername.Name = "lbUsername"
-        Me.lbUsername.Size = New System.Drawing.Size(57, 12)
+        Me.lbUsername.Size = New System.Drawing.Size(58, 13)
         Me.lbUsername.TabIndex = 7
         Me.lbUsername.Text = "Username:"
         '
         'btnCancel
         '
-        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnCancel.Location = New System.Drawing.Point(66, 248)
+        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCancel.Location = New System.Drawing.Point(61, 318)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 21)
         Me.btnCancel.TabIndex = 8
-        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.Text = "Cancel(Esc)"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'btnSave
         '
-        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnSave.Location = New System.Drawing.Point(147, 248)
+        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSave.Location = New System.Drawing.Point(142, 318)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 21)
         Me.btnSave.TabIndex = 9
-        Me.btnSave.Text = "Save Bill"
+        Me.btnSave.Text = "Save Bill(F2)"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'tmRefresher
@@ -222,12 +224,13 @@ Partial Class sfrmHolder
         Me.Label8.Size = New System.Drawing.Size(41, 14)
         Me.Label8.TabIndex = 10
         Me.Label8.Text = "Folder:"
+        Me.Label8.Visible = False
         '
         'btnQuerytoVALC
         '
-        Me.btnQuerytoVALC.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnQuerytoVALC.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnQuerytoVALC.Enabled = False
-        Me.btnQuerytoVALC.Location = New System.Drawing.Point(66, 221)
+        Me.btnQuerytoVALC.Location = New System.Drawing.Point(61, 291)
         Me.btnQuerytoVALC.Name = "btnQuerytoVALC"
         Me.btnQuerytoVALC.Size = New System.Drawing.Size(156, 21)
         Me.btnQuerytoVALC.TabIndex = 18
@@ -237,19 +240,30 @@ Partial Class sfrmHolder
         '
         'btnQuery
         '
-        Me.btnQuery.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnQuery.Location = New System.Drawing.Point(66, 221)
+        Me.btnQuery.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnQuery.Location = New System.Drawing.Point(61, 291)
         Me.btnQuery.Name = "btnQuery"
         Me.btnQuery.Size = New System.Drawing.Size(156, 21)
         Me.btnQuery.TabIndex = 19
-        Me.btnQuery.Text = "Send Query"
+        Me.btnQuery.Text = "Send Query(F3)"
         Me.btnQuery.UseVisualStyleBackColor = True
+        '
+        'btnSkip
+        '
+        Me.btnSkip.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSkip.Location = New System.Drawing.Point(61, 264)
+        Me.btnSkip.Name = "btnSkip"
+        Me.btnSkip.Size = New System.Drawing.Size(156, 21)
+        Me.btnSkip.TabIndex = 20
+        Me.btnSkip.Text = "Skip(F5)"
+        Me.btnSkip.UseVisualStyleBackColor = True
         '
         'sfrmHolder
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(232, 278)
+        Me.ClientSize = New System.Drawing.Size(225, 348)
+        Me.Controls.Add(Me.btnSkip)
         Me.Controls.Add(Me.btnQuery)
         Me.Controls.Add(Me.btnQuerytoVALC)
         Me.Controls.Add(Me.Label1)
@@ -270,8 +284,9 @@ Partial Class sfrmHolder
         Me.Controls.Add(Me.lbFBNumber)
         Me.Controls.Add(Me.lbProNumber)
         Me.Controls.Add(Me.lbFolder)
-        Me.Font = New System.Drawing.Font("Liberation Sans", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.KeyPreview = True
         Me.Name = "sfrmHolder"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -298,4 +313,5 @@ Partial Class sfrmHolder
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents btnQuerytoVALC As System.Windows.Forms.Button
     Friend WithEvents btnQuery As System.Windows.Forms.Button
+    Friend WithEvents btnSkip As Button
 End Class

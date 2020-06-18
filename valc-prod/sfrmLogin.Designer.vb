@@ -27,6 +27,7 @@ Partial Class sfrmLogin
         Me.tbUsername = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnLogin = New System.Windows.Forms.Button()
+        Me.chbRater = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'Label1
@@ -34,7 +35,7 @@ Partial Class sfrmLogin
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(12, 12)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(50, 12)
+        Me.Label1.Size = New System.Drawing.Size(52, 13)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Fullname:"
         '
@@ -53,41 +54,52 @@ Partial Class sfrmLogin
         Me.tbUsername.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tbUsername.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.tbUsername.Location = New System.Drawing.Point(70, 30)
+        Me.tbUsername.Location = New System.Drawing.Point(70, 32)
         Me.tbUsername.Name = "tbUsername"
-        Me.tbUsername.Size = New System.Drawing.Size(91, 20)
-        Me.tbUsername.TabIndex = 3
+        Me.tbUsername.Size = New System.Drawing.Size(233, 20)
+        Me.tbUsername.TabIndex = 2
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 32)
+        Me.Label2.Location = New System.Drawing.Point(6, 34)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(57, 12)
+        Me.Label2.Size = New System.Drawing.Size(58, 13)
         Me.Label2.TabIndex = 2
         Me.Label2.Text = "Username:"
         '
         'btnLogin
         '
         Me.btnLogin.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnLogin.Location = New System.Drawing.Point(228, 50)
+        Me.btnLogin.Location = New System.Drawing.Point(228, 61)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(75, 21)
         Me.btnLogin.TabIndex = 4
         Me.btnLogin.Text = "Login"
         Me.btnLogin.UseVisualStyleBackColor = True
         '
+        'chbRater
+        '
+        Me.chbRater.AutoSize = True
+        Me.chbRater.Location = New System.Drawing.Point(170, 64)
+        Me.chbRater.Name = "chbRater"
+        Me.chbRater.Size = New System.Drawing.Size(52, 17)
+        Me.chbRater.TabIndex = 3
+        Me.chbRater.Text = "Rater"
+        Me.chbRater.UseVisualStyleBackColor = True
+        '
         'sfrmLogin
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(315, 82)
+        Me.ClientSize = New System.Drawing.Size(315, 93)
+        Me.Controls.Add(Me.chbRater)
         Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.tbUsername)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.tbFullname)
         Me.Controls.Add(Me.Label1)
-        Me.Font = New System.Drawing.Font("Liberation Sans", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "sfrmLogin"
         Me.Text = "Login"
@@ -100,4 +112,5 @@ Partial Class sfrmLogin
     Friend WithEvents tbUsername As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents btnLogin As System.Windows.Forms.Button
+    Friend WithEvents chbRater As CheckBox
 End Class
