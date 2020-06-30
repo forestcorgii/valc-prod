@@ -1,4 +1,4 @@
-﻿Public Class sfrmSkipReason
+﻿Public Class dlgSkipReason
     Public reason As String = ""
 
     Private Sub sfrmSkipReason_Load(sender As Object, e As EventArgs) Handles MyBase.Load

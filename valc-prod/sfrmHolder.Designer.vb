@@ -55,7 +55,6 @@ Partial Class sfrmHolder
         Me.lbFolder.Size = New System.Drawing.Size(39, 13)
         Me.lbFolder.TabIndex = 0
         Me.lbFolder.Text = "Folder:"
-        Me.lbFolder.Visible = False
         '
         'lbProNumber
         '
@@ -224,7 +223,6 @@ Partial Class sfrmHolder
         Me.Label8.Size = New System.Drawing.Size(41, 14)
         Me.Label8.TabIndex = 10
         Me.Label8.Text = "Folder:"
-        Me.Label8.Visible = False
         '
         'btnQuerytoVALC
         '

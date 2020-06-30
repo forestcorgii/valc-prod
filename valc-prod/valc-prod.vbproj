@@ -74,6 +74,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dlgInputDispatch.Designer.vb">
+      <DependentUpon>dlgInputDispatch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgInputDispatch.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmMain.Designer.vb">
       <DependentUpon>frmMain.vb</DependentUpon>
     </Compile>
@@ -105,10 +111,10 @@
     <Compile Include="sfrmHolder.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sfrmLogin.Designer.vb">
-      <DependentUpon>sfrmLogin.vb</DependentUpon>
+    <Compile Include="dlgLogin.Designer.vb">
+      <DependentUpon>dlgLogin.vb</DependentUpon>
     </Compile>
-    <Compile Include="sfrmLogin.vb">
+    <Compile Include="dlgLogin.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sfrmQuery.Designer.vb">
@@ -117,27 +123,36 @@
     <Compile Include="sfrmQuery.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sfrmQueryDetail.Designer.vb">
+      <DependentUpon>sfrmQueryDetail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sfrmQueryDetail.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sfrmSettings.Designer.vb">
       <DependentUpon>sfrmSettings.vb</DependentUpon>
     </Compile>
     <Compile Include="sfrmSettings.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sfrmSkipReason.Designer.vb">
-      <DependentUpon>sfrmSkipReason.vb</DependentUpon>
+    <Compile Include="dlgSkipReason.Designer.vb">
+      <DependentUpon>dlgSkipReason.vb</DependentUpon>
     </Compile>
-    <Compile Include="sfrmSkipReason.vb">
+    <Compile Include="dlgSkipReason.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sfrmUpdateBOL.Designer.vb">
-      <DependentUpon>sfrmUpdateBOL.vb</DependentUpon>
+    <Compile Include="dlgUpdateBOL.Designer.vb">
+      <DependentUpon>dlgUpdateBOL.vb</DependentUpon>
     </Compile>
-    <Compile Include="sfrmUpdateBOL.vb">
+    <Compile Include="dlgUpdateBOL.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="XmlSerialization.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="dlgInputDispatch.resx">
+      <DependentUpon>dlgInputDispatch.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
@@ -150,20 +165,23 @@
     <EmbeddedResource Include="sfrmHolder.resx">
       <DependentUpon>sfrmHolder.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sfrmLogin.resx">
-      <DependentUpon>sfrmLogin.vb</DependentUpon>
+    <EmbeddedResource Include="dlgLogin.resx">
+      <DependentUpon>dlgLogin.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sfrmQuery.resx">
       <DependentUpon>sfrmQuery.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sfrmQueryDetail.resx">
+      <DependentUpon>sfrmQueryDetail.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sfrmSettings.resx">
       <DependentUpon>sfrmSettings.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sfrmSkipReason.resx">
-      <DependentUpon>sfrmSkipReason.vb</DependentUpon>
+    <EmbeddedResource Include="dlgSkipReason.resx">
+      <DependentUpon>dlgSkipReason.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sfrmUpdateBOL.resx">
-      <DependentUpon>sfrmUpdateBOL.vb</DependentUpon>
+    <EmbeddedResource Include="dlgUpdateBOL.resx">
+      <DependentUpon>dlgUpdateBOL.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

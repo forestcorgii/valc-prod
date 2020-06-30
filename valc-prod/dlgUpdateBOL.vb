@@ -1,4 +1,4 @@
-﻿Public Class sfrmUpdateBOL
+﻿Public Class dlgUpdateBOL
 
     Sub New(bol As BOLInfo)
 
@@ -6,6 +6,7 @@
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
+        tbFolder.Text = bol.Batch.Folder
         tbProNumber.Text = bol.ProNo
         tbFBNumber.Text = bol.FBNo
     End Sub

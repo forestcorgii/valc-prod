@@ -1,4 +1,4 @@
-﻿Public Class sfrmLogin
+﻿Public Class dlgLogin
     Public User As clsUserInfo
     Sub New(_user As clsUserInfo)
         InitializeComponent()
